@@ -7,3 +7,5 @@ function promisifyRequest(url) {
         return rp(url)
     }
 }
+
+module.exports = promisifyRequest
