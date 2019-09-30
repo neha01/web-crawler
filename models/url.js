@@ -3,9 +3,9 @@ const Schema = mongoose.Schema;
 
 const urlSchema = new Schema({
     url: { type: String, unique: true },
-    referenceCount: Number,
+    referenceCount: { type: Number, default: 1 },
     params: [String]
 });
 
-module.exports = model('url', urlSchema)
+module.exports = mongoose.model('url', urlSchema)
 
