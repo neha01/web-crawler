@@ -13,15 +13,24 @@ processConcurrentRequest.prototype.process = function () {
 
 processConcurrentRequest.prototype.processRequestQueue = function () {
 
-    while (this.requestQueue.length && this.sentRequests < this.maxConnections) {
+    while (this.requestQueue.length && this.sentRequests <= this.maxConnections) {
         request = this.requestQueue.shift()
+        this.sentRequests++
         request().then(
-            parseUrldata(body, this.queue)
-        ).catch((err) =>
-            console.log("error in fetching request from task queue "))
+            (body) => {
+                this.handler(body, this.requestQueue)
+                this.sentRequests--
+                this.processRequestQueue()
+            }
+        ).catch((err) => {
+            this.sentRequests--
+            this.processRequestQueue()
+        }
+        )
     }
-
 }
+
+module.exports = processConcurrentRequest
 
 
 
