@@ -6,7 +6,7 @@ function processConcurrentRequest(opts) {
     this.crawlUrl = opts.crawlUrl
 }
 
-processConcurrentRequest.prototype.process = function () {
+processConcurrentRequest.prototype.process = function (requestPromise) {
     this.taskQueue.push(requestPromise)
     this.processRequestQueue()
 }
