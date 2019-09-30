@@ -3,11 +3,10 @@ function processConcurrentRequest(opts) {
     this.handler = opts.handler
     this.requestQueue = []
     this.sentRequests = 0
-    this.crawlUrl = opts.crawlUrl
 }
 
 processConcurrentRequest.prototype.process = function (requestPromise) {
-    this.taskQueue.push(requestPromise)
+    this.requestQueue.push(requestPromise)
     this.processRequestQueue()
 }
 
