@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const model = require('../models/url')
 
 function connect(config) {
     let dbUrl = `${config.dbUrl}:${config.port}/${config.dbName}`
@@ -15,7 +16,7 @@ const updateData = function (url, params) {
     options = { upsert: true, new: true, setDefaultsOnInsert: true }
 
     // Find the document
-    Model.findOneAndUpdate(query, update, options, function (error, result) {
+    return model.findOneAndUpdate(query, update, options, function (error, result) {
         if (error) return;
 
     });
