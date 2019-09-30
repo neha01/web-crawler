@@ -11,7 +11,7 @@ function connect(config) {
 }
 const updateData = function (url, params) {
     var query = { url: url }
-    update = { url: url, params: { $addToSet: { params } } }
+    update = { $addToSet: { params: params }, $inc: { referenceCount: 1 } }
 
     options = { upsert: true, new: true, setDefaultsOnInsert: true }
 
