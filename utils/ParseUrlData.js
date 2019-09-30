@@ -3,21 +3,24 @@ const url = require('url')
 const db = require('./dbMethods')
 const requestPromise = require('./promisifyRequest')
 
-function ParseUrlData(body, taskQueue) {
-    const $ = cheerio.load(body)
+function parseUrlData(resBody, requestQueue) {
+    const $ = cheerio.load(resBody)
     let links = $('a'); //jquery get all hyperlinks
-    $(links).each(function (idx, link) {
-        let link = $(link).attr('href')
-        let url = link.split('?')[0]
-        let url_parts = url.parse(request.url, true)
-        let query = url_parts.query;
-        let params = Object.keys(query);
-
-        db.updateData(url, params).then(
-            taskQueue.push(requestPromise(url))
+    $(links).each(function (idx, item) {
+        let fullLink = $(item).attr('href')
+        let link = fullLink.split('?')[0]
+        let url_parts = url.parse(fullLink, true)
+        let query = url_parts.query
+        let params = Object.keys(query)
+        console.log("Link: ", link)
+        console.log("params: ", params)
+        db.updateData(link, params).then(
+            () => {
+                requestQueue.push(requestPromise(url))
+            }
         ).catch((err) =>
             console.log("error updating url in Db:", err))
-    });
+    })
 }
 
-module.exports = ParseUrlData
+module.exports = parseUrlData
