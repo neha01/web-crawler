@@ -1,3 +1,6 @@
+/* processConcurrentRequest accepts options object which can be used to specify
+ maxConnections and  a handler function to process request */
+
 function processConcurrentRequest(opts) {
     this.maxConnections = opts.maxConnections;
     this.handler = opts.handler

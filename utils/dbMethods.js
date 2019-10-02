@@ -1,3 +1,5 @@
+/* Db helper methods */
+
 const mongoose = require('mongoose')
 const model = require('../models/url')
 
@@ -9,13 +11,14 @@ function connect(config) {
         console.log('db up and running...', process.env.DB_URl || config.dbUrl)
     })
 }
+
 const updateData = function (url, params) {
     var query = { url: url }
     update = { $addToSet: { params: params }, $inc: { referenceCount: 1 } }
 
     options = { upsert: true, new: true, setDefaultsOnInsert: true }
 
-    // Find the document
+    // Update the document if found,else insert new document
     return model.findOneAndUpdate(query, update, options, function (error, result) {
         if (error) return;
 

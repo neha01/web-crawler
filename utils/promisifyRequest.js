@@ -1,5 +1,6 @@
-const rp = require('request-promise')
+/* promisifyRequest accepts a Url and returns promisified request */
 
+const rp = require('request-promise')
 
 function promisifyRequest(url) {
 
