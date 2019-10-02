@@ -17,7 +17,7 @@ function parseUrlData(resBody, requestQueue) {
         let params = Object.keys(query)
         db.updateData(link, params).then(
             () => {
-                requestQueue.push(requestPromise(url))
+                requestQueue.push(requestPromise(link))
             }
         ).catch((err) =>
             console.log("error updating url in Db:", err))
