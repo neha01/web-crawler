@@ -4,7 +4,8 @@
   "description": "A Node JS program to crawl a website and fetch all its hyperlinks recursively and store it in db",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"node index.js"
   },
   "repository": {
     "type": "git",
