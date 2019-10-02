@@ -25,6 +25,7 @@ processConcurrentRequest.prototype.processRequestQueue = function () {
                 this.processRequestQueue()
             }
         ).catch((err) => {
+            console.log("Error processing the request")
             this.sentRequests--
             this.processRequestQueue()
         }

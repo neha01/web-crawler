@@ -20,7 +20,7 @@ function parseUrlData(resBody, requestQueue) {
                 requestQueue.push(requestPromise(link))
             }
         ).catch((err) =>
-            console.log("error updating url in Db:", err))
+            console.log(`error updating ${link} url in Db: ${err}`))
     })
 }
 
