@@ -1,5 +1,5 @@
 /* Connects the Db and also promisifies the website Url to be crawled and passes it
-to processConcurrentRequest function alongwith options object ans starts crawling */
+to processConcurrentRequest function alongwith options object and starts crawling */
 
 const config = require('./config')
 const parse = require('./utils/parseUrlData')
