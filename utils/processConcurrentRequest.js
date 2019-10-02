@@ -21,15 +21,13 @@ processConcurrentRequest.prototype.processRequestQueue = function () {
         request().then(
             (body) => {
                 this.handler(body, this.requestQueue)
-                this.sentRequests--
-                this.processRequestQueue()
             }
         ).catch((err) => {
             console.log("Error processing the request")
+        }).finally(() => {
             this.sentRequests--
             this.processRequestQueue()
-        }
-        )
+        })
     }
 }
 
