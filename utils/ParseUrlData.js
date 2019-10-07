@@ -6,7 +6,7 @@ const requestPromise = require('./promisifyRequest')
 /* parseUrlData accepts responseBody and the request Queue as it parameters
 It extract Urls and their parameters from response body and updates it into Db */
 
-function parseUrlData(resBody, requestQueue) {
+function parseUrlData(resBody, requestObject) {
     const $ = cheerio.load(resBody)
     let links = $('a'); //fetch all hyperlinks
     $(links).each(function (idx, item) {
@@ -17,7 +17,8 @@ function parseUrlData(resBody, requestQueue) {
         let params = Object.keys(query)
         db.updateData(link, params).then(
             () => {
-                requestQueue.push(requestPromise(link))
+                requestObject.requestQueue.push(requestPromise(link))
+                requestObject.processRequestQueue()
             }
         ).catch((err) =>
             console.log(`error updating ${link} url in Db: ${err}`))
