@@ -14,19 +14,20 @@ processConcurrentRequest.prototype.process = function (requestPromise) {
 }
 
 processConcurrentRequest.prototype.processRequestQueue = function () {
+    let self = this
 
-    while (this.requestQueue.length && this.sentRequests <= this.maxConnections) {
-        request = this.requestQueue.shift()
-        this.sentRequests++
+    while (self.requestQueue.length && self.sentRequests <= self.maxConnections) {
+        let request = self.requestQueue.shift()
+        self.sentRequests++
         request().then(
             (body) => {
-                this.handler(body, this.requestQueue)
+                self.handler(body, self)
             }
         ).catch((err) => {
-            console.log("Error processing the request")
+
         }).finally(() => {
-            this.sentRequests--
-            this.processRequestQueue()
+            self.sentRequests--
+            self.processRequestQueue()
         })
     }
 }
