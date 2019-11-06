@@ -23,7 +23,7 @@
   "homepage": "https://github.com/neha01/web-crawler#readme",
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
-    "mongoose": "^5.7.3",
+    "mongoose": "^5.7.5",
     "request-promise": "^4.2.4"
   }
 }
